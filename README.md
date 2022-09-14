@@ -1,2 +1,1 @@
-# graphics
-fiddles of cool graphical things I made
+[Github Pages](http://hayden-erickson.github.io/graphics)
