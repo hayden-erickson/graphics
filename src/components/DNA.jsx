@@ -100,8 +100,8 @@ const DNA = () => {
 
   window.requestAnimationFrame(render)
 
-  return <div style={{backgroundColor: 'black', height: '100vh'}}>
-    <svg width={500} height={500}>
+  return <div style={{backgroundColor: 'black', height: '100vh', width: '100vw'}}>
+    <svg width={500} height={500} viewBox='0 0 800 800'>
       <Helix time={time} numCircles={10}/>
     </svg>
   </div>

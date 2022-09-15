@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-const X = 20
-const Y = 20
+const X = 10
+const Y = 10
 const R = 40
 const P = 5000
 
@@ -69,7 +69,7 @@ const Consciousness = () => {
   window.requestAnimationFrame(render)
 
   return (
-      <svg style={{backgroundColor: 'black', width: '100%', height: '100vh'}}>
+      <svg viewBox='0 0 800 800' style={{backgroundColor: 'black', width: 'auto', height: 'auto'}}>
         {
           circles
           .map(p => ({
@@ -81,7 +81,7 @@ const Consciousness = () => {
             key={`cirlce-${i}`}
             cx={x}
             cy={y}
-            r={R * wo}
+            r={R * wo + R/6}
             style={{
               stroke: color,
               opacity: wo,

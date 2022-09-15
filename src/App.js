@@ -6,6 +6,13 @@ import './App.css';
 import Consciousness from './components/Consciousness'
 import DNA from './components/DNA'
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Link,
+  Outlet,
+} from "react-router-dom";
+import "./index.css";
 
 const tabs = ['Consciousness', 'DNA']
 
@@ -16,41 +23,47 @@ const Tab = ({component, handleTabClick}) => (
   </div>
 )
 
-const Tabs = ({children}) => {
-  const [tab, setTab] = useState(children[0])
-
-  console.log(children)
-
-  if( !children || children.length === 0 ) {
-    return (<h1>No Tabs</h1>)
-  }
-
-  return (
-    <div style={{display: 'flex', flexDirection: 'column', backgroundColor: 'black'}}>
-      <div style={{display: 'flex', borderBottom: '1px solid white'}}>
-        {
-          !Array.isArray(children)
-            ? <Tab component={children} handleTabClick={() => setTab(children)} />
-            : children.map(c => <Tab component={c} handleTabClick={() => setTab(c)} />)
-        }
-      </div>
-
-      <div>
-        {tab}
-      </div>
-    </div>
-  )
-}
-
 function App() {
   return (
-    <div className="App">
-      <Tabs>
-        <DNA tabName="DNA"/>
-        <Consciousness tabName="Consciousness" />
-      </Tabs>
+    <div className="App" style={{backgroundColor: 'black', height: '100vh'}}>
+      <div style={{display: 'flex', flexDirection: 'column', backgroundColor: 'black'}}>
+        <div style={{display: 'flex', borderBottom: '1px solid white'}}>
+          {
+            ['dna', 'consciousness'].map(t => (
+              <Link to={t}>
+                <div style={{backgroundColor: 'white', padding: 8, cursor: 'pointer', border: '1px solid black'}}>
+                  {t}
+                </div>
+              </Link>
+              )
+            )
+          }
+        </div>
+
+        <Outlet />
+      </div>
     </div>
   );
 }
 
-export default App;
+const router = createBrowserRouter([
+  {
+    path: "/graphics",
+    element: <App />,
+    children: [
+      {
+        path: 'dna',
+        element: <DNA />
+      },
+      {
+        path: 'consciousness',
+        element: <Consciousness />
+      },
+    ]
+  },
+]);
+
+const RoutedApp = () => <RouterProvider router={router} />
+
+
+export default RoutedApp;
