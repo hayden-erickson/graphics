@@ -30,7 +30,7 @@ function App() {
         <div style={{display: 'flex', borderBottom: '1px solid white'}}>
           {
             ['dna', 'consciousness'].map(t => (
-              <Link to={t}>
+              <Link key={`${t}-tab`} to={t}>
                 <div style={{backgroundColor: 'white', padding: 8, cursor: 'pointer', border: '1px solid black'}}>
                   {t}
                 </div>
@@ -49,7 +49,7 @@ function App() {
 const router = createBrowserRouter([
   {
     path: "/graphics",
-    element: <App />,
+    element: <Consciousness />,
     children: [
       {
         path: 'dna',
@@ -60,6 +60,14 @@ const router = createBrowserRouter([
         element: <Consciousness />
       },
     ]
+  },
+  {
+    path: "/graphics/consciousness",
+    element: <Consciousness />,
+  },
+  {
+    path: "/graphics/dna",
+    element: <DNA />,
   },
 ]);
 
